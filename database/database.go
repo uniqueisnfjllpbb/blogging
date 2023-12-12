@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
-	// "os"
+	"os"
 
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
@@ -22,10 +22,10 @@ var d *gorm.DB
 
 func InitDB() *gorm.DB {
     errEnv := godotenv.Load(".env")
-    // db_host := os.Getenv("DB_HOST")
-    // db_database := os.Getenv("DB_DATABASE")
-    // db_username := os.Getenv("DB_USERNAME")
-    // db_password := os.Getenv("DB_PASSWORD")
+    db_host := os.Getenv("DB_HOST")
+    db_database := os.Getenv("DB_DATABASE")
+    db_username := os.Getenv("DB_USERNAME")
+    db_password := os.Getenv("DB_PASSWORD")
     if errEnv != nil {
 		fmt.Printf("読み込み出来ませんでした: %v", errEnv)
 	} 
