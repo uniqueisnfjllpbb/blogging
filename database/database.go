@@ -1,17 +1,18 @@
 package database
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"os"
 
-	"github.com/jinzhu/gorm"
+	// "github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq" // ←これを追記
-     "gorm.io/driver/postgres"
+	//  "gorm.io/driver/postgres"
 )
 
-var d *gorm.DB
+var d *sql.DB
 
 // type User struct {
 //     gorm.Model
@@ -20,7 +21,7 @@ var d *gorm.DB
 // }
 
 
-func InitDB() *gorm.DB {
+func InitDB() *sql.DB {
     errEnv := godotenv.Load(".env")
     db_host := os.Getenv("DB_HOST")
     db_database := os.Getenv("DB_DATABASE")
@@ -29,7 +30,7 @@ func InitDB() *gorm.DB {
     if errEnv != nil {
 		fmt.Printf("読み込み出来ませんでした: %v", errEnv)
 	} 
-    db, err := gorm.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s:5432/%s?sslmode=disable",db_username, db_password, db_host, db_database))
+    db, err := sql.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s:5432/%s?sslmode=disable",db_username, db_password, db_host, db_database))
      
     // "admin:passwordpassword@/blg_general?sslmode=disable"
     if err != nil {
@@ -44,7 +45,7 @@ func InitDB() *gorm.DB {
 
 
 // GetDB returns database connection
-func GetDB() *gorm.DB {
+func GetDB() *sql.DB {
     return d
 }
 

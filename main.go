@@ -1,11 +1,11 @@
 package main
 
-import 
-(
-    "github.com/gin-gonic/gin"
-    "net/http"
-    "github.com/uniqueisnfjllpbb/blogging/database"
-    
+import (
+	"fmt"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/uniqueisnfjllpbb/blogging/database"
 )
 
 func main() {
@@ -14,6 +14,7 @@ func main() {
 
     
     r.Run(":8081")
+    fmt.Println("localhost:8081")
     defer database.Close()
 
     r.GET("/hello", func(c *gin.Context) {
