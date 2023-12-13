@@ -35,8 +35,10 @@ func InitDB() *sql.DB {
     // "admin:passwordpassword@/blg_general?sslmode=disable"
     if err != nil {
         log.Fatalln(err)
+    } else {
+        fmt.Println("DB接続に成功しました。")
     }
-    
+
 
 
 

@@ -13,13 +13,15 @@ func main() {
     database.InitDB()
 
     
-    r.Run(":8081")
+    
     fmt.Println("localhost:8081")
     defer database.Close()
 
-    r.GET("/hello", func(c *gin.Context) {
+    r.GET("/", func(c *gin.Context) {
         c.JSON(http.StatusOK, gin.H{
             "message": "hello world",
         })
     })
+
+    r.Run(":8081")
 }
