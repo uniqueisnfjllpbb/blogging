@@ -30,12 +30,15 @@ func InitDB() *sql.DB {
     if errEnv != nil {
 		fmt.Printf("読み込み出来ませんでした: %v", errEnv)
 	} 
-    db, err := sql.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s:5432/%s?sslmode=disable",db_username, db_password, db_host, db_database))
-     
+    db, err := sql.Open("postgres", fmt.Sprintf("%s:%s@%s:5432/%s?sslmode=disable",db_username, db_password, db_host, db_database))
+    // postgres://
     // "admin:passwordpassword@/blg_general?sslmode=disable"
     if err != nil {
         log.Fatalln(err)
     }
+    
+
+
 
 
 
