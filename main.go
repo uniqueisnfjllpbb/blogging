@@ -17,7 +17,9 @@ func main() {
     fmt.Println("localhost:8081")
     defer database.Close()
 
-    r.GET("/", func(c *gin.Context) {
+    routeblog := r.Group("/blog")
+
+    routeblog.GET("/all", func(c *gin.Context) {
         c.JSON(http.StatusOK, gin.H{
             "message": "hello world",
         })
