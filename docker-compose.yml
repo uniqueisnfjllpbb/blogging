@@ -3,8 +3,8 @@ version: '3.8'
 
 services:
   nginx:
-    container_name: gin-backend
-    build: ./dockerfiles/gin-backend
+    container_name: nginx
+    build: ./dockerfiles/nginx
     depends_on:
       - api
     tty: true
@@ -22,22 +22,22 @@ services:
     container_name: gin-backend
     build: ./dockerfiles/gin-backend
     depends_on:
-      - posgresql
+      - postgresql
     tty: true
     restart: always
-    working_dir: /${app名}
+
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - type: bind
-        source: ./dockerfiles/rails/${app名}
-        target: /${app名}
+        source: ./dockerfiles/gin-backend
+
     expose:
       - '3000'
     ports:
       - '3000:3000'
 
-  posgresql:
-    container_name: posgresql_db
+  postgresql:
+    container_name: postgresql_db
     image: postgres:15.5-alpine3.19
     volumes:
       - db_data:/var/lib/pgsql
@@ -45,8 +45,8 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: admin
-      POSTGRES_USER: admin
-      POSTGRES_DB: ${app名}_development
+      POSTGRES_USER: passwordpassword
+      POSTGRES_DB: blg_general
     ports:
       - "5432:5432"
 
