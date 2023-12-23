@@ -1,4 +1,4 @@
-package server
+package router
 
 import (
 	"github.com/gin-gonic/gin"
@@ -6,6 +6,13 @@ import (
 )
 
 func Routes(r gin.IRouter) {
+
+	//rtr := gin.New()
+
+	//rtr.POST("/signup", SignUp)
+	//rtr.POST("login", SignUp)
+	//rtr.POST("/logout", LogOut)
+
 	routeblog := r.Group("/blog")
 
 	routeblog.GET("/showallposts", handler.ShowAllPosts)

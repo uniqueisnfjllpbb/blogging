@@ -6,35 +6,32 @@ services:
     container_name: nginx
     build: ./dockerfiles/nginx
     depends_on:
-      - api
+      - gin-backend-api
     tty: true
     volumes:
-      - type: bind
-        source: ./dockerfiles/nginx/nginx_config/nginx.conf
-        target: /etc/nginx/nginx.conf
-      - type: bind
-        source: ./dockerfiles/nginx/nginx_config/server.conf
-        target: /etc/nginx/conf.d/default.conf
+# 左から右の場所にマウントされる（:区切り）
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
     ports:
       - "8000:80"
 
-  api:
-    container_name: gin-backend
+  gin-backend-api:
+    container_name: gin-backend-api
     build: ./dockerfiles/gin-backend
     depends_on:
       - postgresql
     tty: true
-    restart: always
 
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+
+#    command:
     volumes:
-      - type: bind
-        source: ./dockerfiles/gin-backend
+      - .:/dockerfiles/gin-backend
 
     expose:
       - '3000'
     ports:
-      - '3000:3000'
+      - '8080:8080'
+#    command: sh -c 'go mod tidy && air'
 
   postgresql:
     container_name: postgresql_db
@@ -45,10 +42,24 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: admin
-      POSTGRES_USER: passwordpassword
+      POSTGRES_USER: ${DB_PASSWORD}
       POSTGRES_DB: blg_general
     ports:
       - "5432:5432"
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:6.11
+    volumes:
+      - db_data:/var/lib/pgadmin4/storage
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
+      TZ: Asia/Tokyo
+    depends_on:
+      - postgresql
+    ports:
+      - "5050:80"
 
 volumes:
   db_data:
