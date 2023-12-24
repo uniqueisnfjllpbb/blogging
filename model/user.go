@@ -7,6 +7,8 @@ import (
 
 type User struct {
 	ID        uuid.UUID `gorm:"primaryKey;size:255;default:uuid_generate_v4()"`
+	FirstName string    `json:"firstname"`
+	LastName  string    `json:"lastname"`
 	Email     string    `json:"email" gorm:"unique"`
 	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at"`
@@ -16,4 +18,8 @@ type User struct {
 type UserResponse struct {
 	ID    uint   `json:"id" gorm:"primaryKey"`
 	Email string `json:"email" gorm:"unique"`
+}
+type Profile struct {
+	User         User   `json:"user" gorm:"foreignKey:UserId; constraint:OnDelete:CASCADE"`
+	Introduction string `json:"instroduction"`
 }
