@@ -5,7 +5,7 @@ import (
 	"github.com/uniqueisnfjllpbb/blogging/handler"
 )
 
-func Routes(r gin.IRouter) {
+func Routes(rtr gin.IRouter) {
 
 	//rtr := gin.New()
 
@@ -13,8 +13,19 @@ func Routes(r gin.IRouter) {
 	//rtr.POST("login", SignUp)
 	//rtr.POST("/logout", LogOut)
 
-	routeblog := r.Group("/blog")
+	//後々メソッドは消したい（動作確認後）
 
-	routeblog.GET("/showallposts", handler.ShowAllPosts)
+	//編集
+	apis := rtr.Group("/api")
+	apis.POST("/createapost", handler.CreateAPost)
+	apis.GET("/showallposts", handler.ShowAllPosts)
+	apis.DELETE("/deleteblog/:id", handler.DeleteAPost)
+	apis.GET("/showapost", handler.ShowAPost)
+	apis.PUT("/rewrite", handler.RewriteAPost)
+
+	//クライアント側
+	blog := rtr.Group("/blog")
+	blog.GET("showallposts", handler.ShowAllPosts)
+	blog.GET("showapost/:id", handler.ShowAPost)
 
 }
