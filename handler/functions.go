@@ -12,4 +12,4 @@ func ShowAPost(c *gin.Context) {}
 
 func RewriteAPost(c *gin.Context) {}
 
-func CreateAPost(c *gin.Context) {}
+func AddAPost(c *gin.Context) {}

@@ -17,15 +17,15 @@ func Routes(rtr gin.IRouter) {
 
 	//編集
 	apis := rtr.Group("/api")
-	apis.POST("/createapost", handler.CreateAPost)
+	apis.POST("/createapost", handler.AddAPost)
 	apis.GET("/showallposts", handler.ShowAllPosts)
 	apis.DELETE("/deleteblog/:id", handler.DeleteAPost)
-	apis.GET("/showapost", handler.ShowAPost)
-	apis.PUT("/rewrite", handler.RewriteAPost)
+	apis.GET("/showapost/:id", handler.ShowAPost)
+	apis.PUT("/rewrite/:id", handler.RewriteAPost)
 
 	//クライアント側
 	blog := rtr.Group("/blog")
 	blog.GET("showallposts", handler.ShowAllPosts)
-	blog.GET("showapost/:id", handler.ShowAPost)
+	blog.GET("addapost/:id", handler.AddAPost)
 
 }
