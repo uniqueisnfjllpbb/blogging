@@ -11,6 +11,7 @@ type User struct {
 	LastName  string    `json:"lastname"`
 	Email     string    `json:"email" gorm:"unique"`
 	Password  string    `json:"password"`
+	IsActive  bool      `json:"isactive"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

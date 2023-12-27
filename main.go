@@ -9,17 +9,11 @@ import (
 )
 
 func main() {
-    r:= gin.Default()
-    database.InitDB()
+	r := gin.Default()
+	database.InitDB()
 
-    
-    
-    fmt.Println("localhost:8081")
-    defer database.Close()
+	fmt.Println("localhost:8081")
+	defer database.Close()
 
-    // routeblog := r.Group("/blog")
-
-    
-
-    r.Run(":8081")
+	r.Run(":8081")
 }
