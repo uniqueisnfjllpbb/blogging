@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/uniqueisnfjllpbb/blogging/fakedata"
 
 	// "net/http"
@@ -13,8 +12,6 @@ import (
 func main() {
 	r := gin.Default()
 	database.InitDB()
-
-	fmt.Println("localhost:8081")
 
 	fakedata.FakeDataGenerator()
 	defer database.Close()
