@@ -1,12 +1,12 @@
 package model
 
 import (
-	"github.com/google/uuid"
+	"github.com/oklog/ulid"
 	"time"
 )
 
 type User struct {
-	ID        uuid.UUID `gorm:"primaryKey;size:255;default:uuid_generate_v4()"`
+	ID        ulid.ULID `gorm:"primaryKey;size:255;"`
 	FirstName string    `json:"firstname"`
 	LastName  string    `json:"lastname"`
 	Email     string    `json:"email" gorm:"unique"`
