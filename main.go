@@ -12,9 +12,10 @@ import (
 func main() {
 	r := gin.Default()
 	database.InitDB()
+	database.Insert()
 
 	fakedata.FakeDataGenerator()
-	defer database.Close()
+	//defer database.Close()
 
 	r.Run(":8081")
 }
