@@ -12,7 +12,7 @@ import (
 func main() {
 	r := gin.Default()
 	database.InitDB()
-	database.Insert()
+	//database.Insert()
 
 	fakedata.FakeDataGenerator()
 	//defer database.Close()

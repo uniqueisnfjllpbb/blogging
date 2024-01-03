@@ -1,24 +1,20 @@
 package database
 
 import (
-	"database/sql"
 	"fmt"
+	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
+	_ "gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"os"
 	//"github.com/oklog/ulid"
 	//"github.com/uniqueisnfjllpbb/blogging/model"
 	"log"
-	//"math/rand"
-	"os"
-	//"time"
-
-	// "github.com/jinzhu/gorm"
-	"github.com/joho/godotenv"
-	_ "github.com/lib/pq" // ←これを追記
-	_ "gorm.io/driver/postgres"
 )
 
-var d *sql.DB
+var d *gorm.DB
 
-func InitDB() *sql.DB {
+func InitDB() *gorm.DB {
 	errEnv := godotenv.Load(".env")
 	db_host := os.Getenv("DB_HOST")
 	db_database := os.Getenv("DB_DATABASE")
@@ -27,11 +23,10 @@ func InitDB() *sql.DB {
 	if errEnv != nil {
 		fmt.Printf("読み込み出来ませんでした: %v", errEnv)
 	}
-	db, err := sql.Open("postgres", fmt.Sprintf("%s:%s@%s:5432/%s?sslmode=disable", db_username, db_password, db_host, db_database))
-	defer db.Close()
+	dbenv := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable TimeZone=Asia/Shanghai", db_host, db_username, db_password, db_database)
+	db, err := gorm.Open(postgres.Open(dbenv), &gorm.Config{})
+	//defer db.Close()
 
-	// postgres://
-	// "admin:passwordpassword@/blg_general?sslmode=disable"
 	if err != nil {
 		log.Fatalln(err)
 	} else {
