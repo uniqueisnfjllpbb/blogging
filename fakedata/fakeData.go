@@ -15,7 +15,7 @@ func FakeDataGenerator() {
 	//entropy := ulid.Monotonic(rand.New(rand.NewSource(t.UnixNano())), 0)
 	//id := ulid.MustNew(ulid.Timestamp(t), entropy)
 
-	var tu model.User
+	var tu model.Accounts
 	for i := 0; i < 10; i++ {
 
 		gofakeit.Struct(&tu)
@@ -40,7 +40,7 @@ func FakeDataGenerator() {
 		gofakeit.Struct(&tp)
 		fmt.Printf("テストポスト%v番目スタート\n", i)
 		fmt.Printf("ID:%v\n", tp.ID)
-		fmt.Printf("User:%v\n", tp.User)
+		fmt.Printf("User:%v\n", tp.Account)
 		fmt.Printf("Title:%v\n", tp.Title)
 		fmt.Printf("Body:%v\n", tp.Body)
 		fmt.Printf("CreatedAt:%v\n", tp.CreatedAt)

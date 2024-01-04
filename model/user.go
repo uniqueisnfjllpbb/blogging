@@ -1,12 +1,12 @@
 package model
 
 import (
-	"github.com/oklog/ulid"
+	"github.com/google/uuid"
 	"time"
 )
 
-type User struct {
-	ID        ulid.ULID `gorm:"primaryKey;size:255;"`
+type Accounts struct {
+	ID        uuid.UUID `gorm:"primaryKey;size:255;default:uuid_generate_v4()"`
 	FirstName string    `json:"firstname"`
 	LastName  string    `json:"lastname"`
 	Email     string    `json:"email" gorm:"unique"`
@@ -21,6 +21,6 @@ type UserResponse struct {
 	Email string `json:"email" gorm:"unique"`
 }
 type Profile struct {
-	User         User   `json:"user" gorm:"foreignKey:UserId; constraint:OnDelete:CASCADE"`
-	Introduction string `json:"instroduction"`
+	User         Accounts `json:"account" gorm:"foreignKey:AccountId; constraint:OnDelete:CASCADE"`
+	Introduction string   `json:"instroduction"`
 }
