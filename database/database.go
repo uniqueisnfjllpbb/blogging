@@ -8,8 +8,6 @@ import (
 	_ "gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"os"
-	"time"
-
 	//"github.com/oklog/ulid"
 	//"github.com/uniqueisnfjllpbb/blogging/model"
 	"log"
@@ -35,7 +33,7 @@ func InitDB() *gorm.DB {
 	} else {
 		fmt.Println("DB接続に成功しました。")
 	}
-	create := db.AutoMigrate(&model.Accounts{})
+	create := db.AutoMigrate(&model.Accounts{}, &model.Post{}, &model.Profile{})
 
 	if create != nil {
 		log.Fatalln(create)
@@ -47,23 +45,27 @@ func InitDB() *gorm.DB {
 	//entropy := ulid.Monotonic(rand.New(rand.NewSource(t.UnixNano())), 0)
 	//id := ulid.MustNew(ulid.Timestamp(t), entropy)
 
+	return db
+}
+
+func InsertData(db *gorm.DB) {
+
 	user := model.Accounts{
 
-		FirstName: "testFirstname1",
-		LastName:  "testLastname1",
+		Firstname: "testFirstname1",
+		Lastname:  "testLastname1",
 		Email:     "test1@gmail.com",
 		Password:  "passwordforuser1",
-		IsActive:  true,
-		CreatedAt: time.Time{},
-		UpdatedAt: time.Time{},
+		Isactive:  true,
 	}
 	result := db.Create(&user)
 
 	if result != nil {
-		log.Fatalln(result)
+		log.Fatalln(result.Error)
 	} else {
 		fmt.Println("DBにデータを挿入できました。")
 	}
 
-	return db
+	fmt.Println("count:", result.RowsAffected)
+
 }
