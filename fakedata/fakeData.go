@@ -15,19 +15,24 @@ func FakeDataGenerator() {
 	//entropy := ulid.Monotonic(rand.New(rand.NewSource(t.UnixNano())), 0)
 	//id := ulid.MustNew(ulid.Timestamp(t), entropy)
 
-	//var tu []*model.Accounts
+	var taccounts []*model.Accounts
 	for i := 0; i < 10; i++ {
+		var taccount *model.Accounts
 
-		//gofakeit.Struct(&tu)
-		fmt.Printf("テストユーザー%v番目スタート\n", i)
-		//fmt.Printf("ID:%v\n", tu.ID)
-		//fmt.Printf("LastName:%v\n", tu.Lastname)
-		//fmt.Printf("FirstName:%v\n", tu.Firstname)
-		//fmt.Printf("Email:%v\n", tu.Email)
-		//fmt.Printf("Password:%v\n", tu.Password)
-		//fmt.Printf("IsActive:%v\n", tu.Isactive)
-		//fmt.Printf("CreatedAt:%v\n", tu.CreatedAt)
-		//fmt.Printf("UpdatedAt:%v\n", tu.UpdatedAt)
+		gofakeit.Struct(&taccount)
+		taccounts = append(taccounts, taccount)
+
+		fmt.Println(taccounts)
+
+		//fmt.Printf("テストユーザー%v番目スタート\n", i)
+		//
+		//tu = append(tu.Lastname)
+		//users = append(tu.Firstname)
+		//users = append(tu.Email)
+		//users = append(tu.Password)
+		//users = append(tu.Isactive)
+		//users = append(tu.CreatedAt)
+		//users = append(tu.UpdatedAt)
 
 		//tu := model.Accounts{
 		//	ID:        tu.Firstname,
@@ -38,6 +43,7 @@ func FakeDataGenerator() {
 		//	CreatedAt: tu.CreatedAt,
 		//	UpdatedAt: tu.UpdatedAt,
 		//}
+		//fmt.Println(users)
 
 		//fmt.Println(tu)
 
