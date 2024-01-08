@@ -25,8 +25,8 @@ func InitDB() *gorm.DB {
 	if errEnv != nil {
 		fmt.Printf("読み込み出来ませんでした: %v", errEnv)
 	}
-	dbenv := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable TimeZone=Asia/Shanghai", db_host, db_username, db_password, db_database)
-	db, err := gorm.Open(postgres.Open(dbenv), &gorm.Config{})
+	dbenv := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable TimeZone=Asia/Tokyo", db_host, db_username, db_password, db_database)
+	d, err := gorm.Open(postgres.Open(dbenv), &gorm.Config{})
 	//defer db.Close()
 
 	if err != nil {
@@ -34,21 +34,21 @@ func InitDB() *gorm.DB {
 	} else {
 		fmt.Println("DB接続に成功しました。")
 	}
-	create := db.AutoMigrate(&model.Accounts{}, &model.Post{}, &model.Profile{})
-	if create != nil {
-		log.Fatalln(create)
+	am := d.AutoMigrate(&model.Accounts{}, &model.Post{}, &model.Profile{})
+	if am != nil {
+		log.Fatalln(am)
 	} else {
 		fmt.Println("DB作成に成功しました。")
 	}
-	return db
+	fmt.Println(&d)
+	return d
+
 }
 
-func InsertData(db *gorm.DB) {
-
+func InsertData(d *gorm.DB) {
 	var accounts []model.Accounts
 	for i := 0; i < 10; i++ {
 		account := model.Accounts{
-			//ID:        gofakeit.UUID(),
 			Firstname: gofakeit.FirstName(),
 			Lastname:  gofakeit.LastName(),
 			Email:     gofakeit.Email(),
@@ -58,35 +58,31 @@ func InsertData(db *gorm.DB) {
 
 	}
 
-	fmt.Println(accounts)
+	//for _, account := range accounts {
+	//	fmt.Printf("ID: %s\n", account.ID)
+	//	fmt.Printf("Firstname: %s\n", account.Firstname)
+	//	fmt.Printf("Lastname: %s\n", account.Lastname)
+	//	fmt.Printf("Email: %s\n", account.Email)
+	//	fmt.Printf("Password: %s\n", account.Password)
+	//}
 
-	for _, account := range accounts {
-		//fmt.Printf("ID: %s\n", account.ID)
-		fmt.Printf("Firstname: %s\n", account.Firstname)
-		fmt.Printf("Lastname: %s\n", account.Lastname)
-		fmt.Printf("Email: %s\n\n", account.Email)
-		fmt.Printf("Password: %s\n\n", account.Password)
-	}
 	var posts []model.Post
 	for i := 0; i < 10; i++ {
 		post := model.Post{
-			//ID:        gofakeit.UUID(),
 			Title: gofakeit.BookTitle(),
 			Body:  gofakeit.LoremIpsumSentence(100),
 		}
 		posts = append(posts, post)
 	}
 
-	fmt.Println(posts)
+	//for _, post := range posts {
+	//	//fmt.Printf("ID: %s\n", account.ID)
+	//	fmt.Printf("Title: %s\n", post.Title)
+	//	fmt.Printf("Body: %s\n", post.Body)
+	//}
 
-	for _, post := range posts {
-		//fmt.Printf("ID: %s\n", account.ID)
-		fmt.Printf("Title: %s\n", post.Title)
-		fmt.Printf("Body: %s\n", post.Body)
-	}
-
-	resultaccount := db.Create(&accounts)
-	resultpost := db.Create(&posts)
+	resultaccount := d.Create(&accounts)
+	resultpost := d.Create(&posts)
 
 	if resultaccount != nil {
 		log.Fatalln(resultaccount.Error)
@@ -99,5 +95,5 @@ func InsertData(db *gorm.DB) {
 	} else {
 		fmt.Println("DBにポストデータを挿入できました。")
 	}
-
+	fmt.Println(&d)
 }

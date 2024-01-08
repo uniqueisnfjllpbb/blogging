@@ -2,7 +2,6 @@ package model
 
 import (
 	"gorm.io/gorm"
-	"time"
 )
 
 type Post struct {
@@ -14,8 +13,6 @@ type Post struct {
 
 type Reply struct {
 	gorm.Model
-	Comment   string    `json:"comment" gorm:"not null"`
-	Account   Accounts  `json:"account" gorm:"foreignKey:AccountsId; constraint:OnDelete:CASCADE"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	Comment string   `json:"comment" gorm:"not null"`
+	Account Accounts `json:"account" gorm:"foreignKey:AccountsId; constraint:OnDelete:CASCADE"`
 }

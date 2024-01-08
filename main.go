@@ -1,20 +1,15 @@
 package main
 
 import (
-	"github.com/uniqueisnfjllpbb/blogging/fakedata"
-	// "net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/uniqueisnfjllpbb/blogging/database"
+	"github.com/uniqueisnfjllpbb/blogging/router"
 )
 
 func main() {
 	r := gin.Default()
+	router.Routes(r)
 	dbCon := database.InitDB()
 	database.InsertData(dbCon)
-
-	fakedata.FakeDataGenerator()
-	//defer database.Close()
-
 	r.Run(":8081")
 }

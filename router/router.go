@@ -2,12 +2,15 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/uniqueisnfjllpbb/blogging/controller"
 	"github.com/uniqueisnfjllpbb/blogging/handler"
 )
 
 func Routes(rtr gin.IRouter) {
 
-	//rtr := gin.New()
+	gin.New()
+
+	rtr.POST("/register", controller.Register)
 
 	//rtr.POST("/signup", SignUp)
 	//rtr.POST("login", SignUp)
