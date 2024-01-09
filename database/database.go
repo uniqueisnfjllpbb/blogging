@@ -40,12 +40,14 @@ func InitDB() *gorm.DB {
 	} else {
 		fmt.Println("DB作成に成功しました。")
 	}
-	fmt.Println(&d)
+
 	return d
 
 }
 
 func InsertData(d *gorm.DB) {
+	fmt.Println(d)
+
 	var accounts []model.Accounts
 	for i := 0; i < 10; i++ {
 		account := model.Accounts{
@@ -85,15 +87,16 @@ func InsertData(d *gorm.DB) {
 	resultpost := d.Create(&posts)
 
 	if resultaccount != nil {
-		log.Fatalln(resultaccount.Error)
+		//log.Fatalln(resultaccount.Error)
+		fmt.Println("エラー1")
 	} else {
 		fmt.Println("DBにアカウントデータを挿入できました。")
 	}
 
 	if resultpost != nil {
-		log.Fatalln(resultpost.Error)
+		fmt.Println("エラー2")
 	} else {
 		fmt.Println("DBにポストデータを挿入できました。")
 	}
-	fmt.Println(&d)
+
 }
