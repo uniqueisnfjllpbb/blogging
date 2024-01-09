@@ -88,13 +88,13 @@ func InsertData(d *gorm.DB) {
 
 	if resultaccount != nil {
 		//log.Fatalln(resultaccount.Error)
-		fmt.Println("エラー1")
+		fmt.Println("アカウント作成エラー")
 	} else {
 		fmt.Println("DBにアカウントデータを挿入できました。")
 	}
 
 	if resultpost != nil {
-		fmt.Println("エラー2")
+		fmt.Println("ポスト作成エラー")
 	} else {
 		fmt.Println("DBにポストデータを挿入できました。")
 	}
