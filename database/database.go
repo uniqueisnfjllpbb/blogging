@@ -94,7 +94,7 @@ func InsertData(d *gorm.DB) {
 	}
 
 	if resultpost != nil {
-		fmt.Println("ポスト作成エラー")
+		fmt.Println("ポスト作成エラー1")
 	} else {
 		fmt.Println("DBにポストデータを挿入できました。")
 	}
