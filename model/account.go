@@ -24,3 +24,8 @@ type Profile struct {
 	Introduction string `json:"introduction"`
 	AccountsId   uint   `json:"AccountsId" gorm:"not null"`
 }
+
+type LoginInfo struct {
+	Email    string `gorm:"unique; not null"`
+	Password string `gorm:"not null"`
+}
