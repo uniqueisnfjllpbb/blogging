@@ -15,7 +15,7 @@ type Accounts struct {
 	Profile   Profile `gorm:"foreignKey:AccountsId"`
 }
 
-type UserResponse struct {
+type AccountResponse struct {
 	ID    uint   `json:"id" gorm:"primaryKey"`
 	Email string `json:"email" gorm:"unique"`
 }
