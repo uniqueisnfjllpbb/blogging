@@ -10,7 +10,7 @@ func Routes(rtr gin.IRouter) {
 
 	gin.New()
 
-	rtr.POST("/register", controller.Register)
+	rtr.POST("/register", controller.Login)
 
 	//rtr.POST("/signup", SignUp)
 	//rtr.POST("login", SignUp)

@@ -26,6 +26,18 @@ type Profile struct {
 }
 
 type LoginInfo struct {
-	Email    string `gorm:"unique; not null"`
-	Password string `gorm:"not null"`
+	gorm.Model
+	Email    string `form:"email" binding:"required" gorm:"unique; not null"`
+	Username string `form:"username" binding:"required" gorm:"not null"`
+	Password string `form:"password" binding:"required" gorm:"not null"`
+}
+
+type SignupInfo struct {
+	gorm.Model
+	Firstname string `form:"firstname" binding:"required" gorm:"not null"`
+	Lastname  string `form:"lastname" binding:"required" gorm:"not null"`
+	Email     string `form:"email" binding:"required" gorm:"unique; not null"`
+
+	Password        string `form:"password" binding:"required"`
+	ConfirmPassword string `form:"confirmpassword" binding:"required"`
 }
