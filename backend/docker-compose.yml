@@ -4,7 +4,7 @@ version: '3.8'
 services:
   nginx:
     container_name: nginx
-    build: ./dockerfiles/nginx
+    build: dockerfiles/nginx
     depends_on:
       - gin-backend-api
     tty: true
@@ -17,7 +17,7 @@ services:
 
   gin-backend-api:
     container_name: gin-backend-api
-    build: ./dockerfiles/gin-backend
+    build: dockerfiles/gin-backend
     depends_on:
       - postgresql
     tty: true

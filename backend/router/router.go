@@ -12,7 +12,7 @@ func Routes(rtr gin.IRouter) {
 
 	rtr.POST("/register", controller.Login)
 
-	//rtr.POST("/signup", SignUp)
+	rtr.POST("/signup", controller.Signup)
 	//rtr.POST("login", SignUp)
 	//rtr.POST("/logout", LogOut)
 
